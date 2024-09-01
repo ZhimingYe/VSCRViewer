@@ -107,7 +107,7 @@ lsEnv <- function(envir=parent.frame()){
 
   ui <- shinyUI(
     pageWithSidebar(
-      titlePanel("dotViewer 0.1.0"),
+      titlePanel("VSCRViewer "),
 
       sidebarPanel(
         shinyTree("tree"),width = 10
@@ -224,7 +224,7 @@ lsEnv <- function(envir=parent.frame()){
 
   ui <- shinyUI(
     pageWithSidebar(
-      titlePanel("dotViewer 0.1.0"),
+      titlePanel("VSCRViewer "),
 
       sidebarPanel(
         shinyTree("tree"),width = 10
@@ -253,7 +253,7 @@ lsEnv <- function(envir=parent.frame()){
   require(shiny)
   require(DT)
   ui <- fluidPage(
-    titlePanel("dotViewer 0.1.0"),
+    titlePanel("VSCRViewer "),
     DTOutput("mytable")
   )
   server <- function(input, output) {
@@ -327,6 +327,6 @@ Print.Char<-function(CharacterCollection,Type="c",return=F){
 
 
 .onAttach<-function(libname,pkgname){
-  packageStartupMessage("\n***dotViewer***\nView DF using ViewDF, View Object using ViewObj, View List using ViewList\n=============\nAuthor:Zhiming Ye\n")
+  packageStartupMessage("\n***VSCRViewer***\nView DF using ViewDF, View Object using ViewObj, View List using ViewList\n=============\nAuthor:Zhiming Ye\n")
 }
 # attachment::att_amend_desc()

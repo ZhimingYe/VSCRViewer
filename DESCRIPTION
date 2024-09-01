@@ -1,5 +1,5 @@
 Type: Package
-Package: dotViewer
+Package: VSCRViewer
 Title: View R Object in Shiny
 Version: 0.1.5
 Author: Zhiming Ye

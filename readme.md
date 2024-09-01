@@ -1,6 +1,6 @@
-# dotViewer : Simple R Object Viewer in VSCode/Terminal
+# VSCRViewer : Simple R Object Viewer in VSCode/Terminal
 
-**dotViewer** is an R Packages that brings an RStudio-like variable object property preview to the VSCode environment. This tool is designed for R users who want to seamlessly explore the properties of their variables, especially complex objects like S4, directly within VSCode. This package is based on `shiny`.
+**VSCRViewer** is an R Packages that brings an RStudio-like variable object property preview to the VSCode environment. This tool is designed for R users who want to seamlessly explore the properties of their variables, especially complex objects like S4, directly within VSCode. This package is based on `shiny`.
 
 ![](Figs/Fig3.jpg)
 
@@ -14,13 +14,13 @@ Easily inspect S4 objects' slots and structure, similar to the RStudio environme
 
 -   **Comprehensive Property Overview**:
 
-dotViewer parses the output of the `str()` function to generate a detailed property map using `ShinyTree`, providing a clear and organized overview of an object’s structure.
+VSCRViewer parses the output of the `str()` function to generate a detailed property map using `ShinyTree`, providing a clear and organized overview of an object’s structure.
 
 ![](Figs/s3obj.jpg)
 
 -   **S3 and Untested Object Compatibility**:
 
-For objects like S3 and others that may not have been extensively tested, dotViewer offers an `AceEditor`-based editor. This editor allows for the preview of `str()` output with advanced features like syntax highlighting and search, enhancing your understanding of object structures, which are not supported in the default VSCode R extension.
+For objects like S3 and others that may not have been extensively tested, VSCRViewer offers an `AceEditor`-based editor. This editor allows for the preview of `str()` output with advanced features like syntax highlighting and search, enhancing your understanding of object structures, which are not supported in the default VSCode R extension.
 
 ![](Figs/S3Tibble.jpg)
 
@@ -30,7 +30,7 @@ For objects like S3 and others that may not have been extensively tested, dotVie
 
 -   **DT-Based Table Preview**:
 
-When working over SSH connections, loading large tables into the VSCode front-end can potentially cause instability. dotViewer addresses this by providing a preview pane based on DT for table objects, ensuring a more stable experience.
+When working over SSH connections, loading large tables into the VSCode front-end can potentially cause instability. VSCRViewer addresses this by providing a preview pane based on DT for table objects, ensuring a more stable experience.
 
 ![](Figs/DTExample.jpg)
 
@@ -83,7 +83,7 @@ Enjoy the convenience of RStudio’s object inspection capabilities within the p
 2.  **Setup**:
 
     ```         
-    devtools::install_github("ZhimingYe/dotViewer")
+    devtools::install_github("ZhimingYe/VSCRViewer")
     ```
 
 ## Usage
@@ -91,7 +91,7 @@ Enjoy the convenience of RStudio’s object inspection capabilities within the p
 1.  **View S4 or others object**:
 
     ```         
-    dotViewer::ViewObj(obj)
+    VSCRViewer::ViewObj(obj)
     ```
 
     The core implement is below. You can modify extract patterns by passing Pattern1\~3
@@ -122,19 +122,19 @@ Enjoy the convenience of RStudio’s object inspection capabilities within the p
 2.  **Viewing tables:**
 
     ```         
-    dotViewer::ViewDF(x,n = 10000) # You can determine how many rows is passed to DT
+    VSCRViewer::ViewDF(x,n = 10000) # You can determine how many rows is passed to DT
     ```
 
 3.  **Viewing lists:**
 
     ```         
-    dotViewer::ViewList(x)
+    VSCRViewer::ViewList(x)
     ```
 
 4.  **Viewing environment:**
 
     ```         
-    dotViewer::ViewEnv(x)
+    VSCRViewer::ViewEnv(x)
     ```
 
     ## License
