@@ -61,7 +61,7 @@ Enjoy the convenience of RStudio’s object inspection capabilities within the p
 2.  **Setup**:
 
     ```         
-    devtools::install_github("ZhimingYe/dotView")
+    devtools::install_github("ZhimingYe/dotViewer")
     ```
 
 ## Usage
