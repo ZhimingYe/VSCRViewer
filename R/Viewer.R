@@ -264,6 +264,68 @@ lsEnv <- function(envir=parent.frame()){
 
   shinyApp(ui = ui, server = server)
 }
+
+
+
+
+#' @title An enhanced method to print character vector to the console
+#'
+#' @param CharacterCollection A character vector which will be print.
+#' @param Type A character. Can be "c", "tab" or "plus". c means comma, tab means print in multi-lines, and plus means to separate with "+"
+#' @param return if return=F, only print in console. Set TRUE to return an object.
+#'
+#' @return
+#' @export
+#' @author Zhiming Ye
+#'
+#'
+Print.Char<-function(CharacterCollection,Type="c",return=F){
+
+  if(Type=="tab"){
+    CHAR<-"\n"
+    for(i in 1:length(CharacterCollection)){
+      if(i!=length(CharacterCollection)){
+        CHAR<-paste0(CHAR,CharacterCollection[i],"\n")
+      }
+      else{
+        CHAR<-paste0(CHAR,CharacterCollection[i])
+      }
+    }
+  }
+  if(Type=="c"){
+    CHAR<-"\""
+    for(i in 1:length(CharacterCollection)){
+      if(i!=length(CharacterCollection)){
+        CHAR<-paste0(CHAR,CharacterCollection[i],"\",\"")
+      }
+      else{
+        CHAR<-paste0(CHAR,CharacterCollection[i],"\"")
+      }
+    }
+  }
+  if(Type=="plus"){
+    CHAR<-"~"
+    for(i in 1:length(CharacterCollection)){
+      if(i!=length(CharacterCollection)){
+        CHAR<-paste0(CHAR,CharacterCollection[i],"+")
+      }
+      else{
+        CHAR<-paste0(CHAR,CharacterCollection[i])
+      }
+    }
+  }
+
+  if(return){
+    return(CHAR)
+  }
+  else{
+    cat(CHAR)
+  }
+}
+
+
+
+
 .onAttach<-function(libname,pkgname){
   packageStartupMessage("\n***dotViewer***\nView DF using ViewDF, View Object using ViewObj, View List using ViewList\n=============\nAuthor:Zhiming Ye\n")
 }
