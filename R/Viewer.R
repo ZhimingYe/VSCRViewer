@@ -273,14 +273,6 @@ lsEnv <- function(envir=parent.frame()){
   require(shiny)
   require(DT)
   ui <- fluidPage(
-    tags$head(
-      tags$style(type = "text/css", "
-      #shiny-disconnected-overlay {
-        background-color: inherit;
-        opacity: 0;
-      }
-    ")
-    ),
     titlePanel("VSCRViewer "),
     DTOutput("mytable")
   )
@@ -289,7 +281,7 @@ lsEnv <- function(envir=parent.frame()){
       datatable(df, options = list(pageLength = 50, autoWidth = TRUE))
     })
   }
-  message("Web Viewer generated. You can use Ctrl+C to cancel shiny app.\nThe webpage is static, so it won't be lost after closing, and you can continue with your other tasks.")
+  message("Web Viewer generated. Viewing DF needs continously Shiny running...")
   shinyApp(ui = ui, server = server)
 
 }
