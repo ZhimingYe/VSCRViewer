@@ -37,8 +37,8 @@ ViewDF<-function(x,n=10000){
 #' @return A shiny website
 #' @export
 #'
-ViewObj<-function(x,selfExpr=F,pattern1=NULL,pattern2=NULL,pattern3=NULL,move=0,removeBlank=T){
-  if(!isS4(x)){
+ViewObj<-function(x,selfExpr=F,pattern1=NULL,pattern2=NULL,pattern3=NULL,move=1,removeBlank=T,warning=T){
+  if(warning&(!isS4(x))){
     warning("Not S4 Object! It might not be correctly rendered.")
   }
   if(is.null(pattern1)){
@@ -70,6 +70,34 @@ ViewList <- function(x){
     stop("Not A list!")
   }
   .ViewListInternal(x)
+}
+
+#' View Environment object in shiny
+#'
+#' @param envir Show which environment, default is `parent.frame()`
+#'
+#' @author Zhiming Ye
+#' @return a shiny website
+#' @export
+#'
+ViewEnv <- function(envir=parent.frame()){
+  objects <- ls(envir = envir)
+  object_types <- sapply(objects, function(x) class(get(x,envir = envir)))
+  ViewObj(object_types,warning=F)
+}
+
+#' View Environment object and return a list
+#'
+#' @param envir Show which environment, default is `parent.frame()`
+#'
+#' @author Zhiming Ye
+#' @return a list
+#' @export
+#'
+lsEnv <- function(envir=parent.frame()){
+  objects <- ls(envir = envir)
+  object_types <- sapply(objects, function(x) class(get(x,envir = envir)))
+  return(object_types)
 }
 
 .ViewListInternal <- function(x){

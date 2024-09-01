@@ -10,8 +10,9 @@ ViewObj(
   pattern1 = NULL,
   pattern2 = NULL,
   pattern3 = NULL,
-  move = 0,
-  removeBlank = T
+  move = 1,
+  removeBlank = T,
+  warning = T
 )
 }
 \arguments{

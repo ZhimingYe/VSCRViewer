@@ -8,7 +8,7 @@
 
 -   **S4 Object Inspection**:
 
-Easily inspect S4 objects' slots and structure, similar to the RStudio environment, by print `ViewObj(x)`. 
+Easily inspect S4 objects' slots and structure, similar to the RStudio environment, by print `ViewObj(x)`.
 
 ![](Figs/S4obj.jpg)
 
@@ -26,13 +26,19 @@ For objects like S3 and others that may not have been extensively tested, dotVie
 
 -   **List Viewing**:
 
-`ShinyTree` is based on list, you can use `ViewList` to view lists. 
+`ShinyTree` is based on list, you can use `ViewList` to view lists.
 
 -   **DT-Based Table Preview**:
 
 When working over SSH connections, loading large tables into the VSCode front-end can potentially cause instability. dotViewer addresses this by providing a preview pane based on DT for table objects, ensuring a more stable experience.
 
 ![](Figs/DTExample.jpg)
+
+-   **Viewing Environment**:
+
+Running in other place without RStudio is difficult to monitor environment, and `ViewEnv()` can help you.
+
+![](Figs/envview.jpg)
 
 -   **Integrated with VSCode**:
 
@@ -96,13 +102,18 @@ Enjoy the convenience of RStudio’s object inspection capabilities within the p
     ```         
     dotViewer::ViewDF(x,n = 10000) # You can determine how many rows is passed to DT
     ```
-    
+
 3.  **Viewing lists:**
 
     ```         
     dotViewer::ViewList(x)
     ```
+    
+4.  **Viewing environment:**
 
+    ```         
+    dotViewer::ViewEnv(x)
+    ```
 ## License
 
 GPL-V3
