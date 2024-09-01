@@ -13,6 +13,9 @@ Print.Char(CharacterCollection, Type = "c", return = F)
 
 \item{return}{if return=F, only print in console. Set TRUE to return an object.}
 }
+\value{
+a prited result or a vector
+}
 \description{
 An enhanced method to print character vector to the console
 }

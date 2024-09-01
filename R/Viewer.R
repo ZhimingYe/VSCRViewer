@@ -121,6 +121,10 @@ lsEnv <- function(envir=parent.frame()){
         shinyTree("tree"),width = 10
       ),
       mainPanel(
+        div(
+          style = "text-align: left;",
+          tags$footer(paste0("You can using Command+F to enable search in Ace Editor"), style = "font-size: 14px; color: black;")
+        ),
         aceEditor("r_code",
                   mode = "r",            # Set editor mode to R
                   theme = "textmate",    # Set editor theme
@@ -248,6 +252,10 @@ lsEnv <- function(envir=parent.frame()){
         shinyTree("tree"),width = 10
       ),
       mainPanel(
+        div(
+          style = "text-align: left;",
+          tags$footer(paste0("You can using Command+F to enable search in Ace Editor"), style = "font-size: 14px; color: black;")
+        ),
         aceEditor("r_code",
                   mode = "r",            # Set editor mode to R
                   theme = "textmate",    # Set editor theme
@@ -273,14 +281,6 @@ lsEnv <- function(envir=parent.frame()){
   require(shiny)
   require(DT)
   ui <- fluidPage(
-    tags$head(
-      tags$style(type = "text/css", "
-      #shiny-disconnected-overlay {
-        background-color: inherit;
-        opacity: 0;
-      }
-    ")
-    ),
     titlePanel("VSCRViewer "),
     DTOutput("mytable")
   )
@@ -289,7 +289,7 @@ lsEnv <- function(envir=parent.frame()){
       datatable(df, options = list(pageLength = 50, autoWidth = TRUE))
     })
   }
-  message("Web Viewer generated. You can use Ctrl+C to cancel shiny app.\nThe webpage is static, so it won't be lost after closing, and you can continue with your other tasks.")
+  message("Web Viewer generated. Viewing DF needs continously Shiny running...")
   shinyApp(ui = ui, server = server)
 
 }
@@ -297,13 +297,12 @@ lsEnv <- function(envir=parent.frame()){
 
 
 
-#' @title An enhanced method to print character vector to the console
-#'
+#' An enhanced method to print character vector to the console
 #' @param CharacterCollection A character vector which will be print.
 #' @param Type A character. Can be "c", "tab" or "plus". c means comma, tab means print in multi-lines, and plus means to separate with "+"
 #' @param return if return=F, only print in console. Set TRUE to return an object.
 #'
-#' @return
+#' @return a prited result or a vector
 #' @export
 #' @author Zhiming Ye
 #'
@@ -353,6 +352,76 @@ Print.Char<-function(CharacterCollection,Type="c",return=F){
 }
 
 
+#' Previewing data table elements like rownames or colnames using Ace Editor
+#'
+#' Display `rownames()`, `colnames()` and `head()` result in Ace Editor. Ace Editor provides searching function and basic highlight functions. You can better view it in large tables
+#' @param x A data.frame, tibble ...
+#' @param n_lines display n rows
+#' @param enforceALL only display first 7500 objs, if want more, set enforceALL=T
+#' @author Zhiming Ye
+#' @return A shiny page
+#' @export
+#'
+
+PreviewDF <- function(x,n_lines=7L,enforceALL=F){
+  washnames <- function(y){
+    if(length(y)>7500 & !enforceALL){
+      y<-c(y[1:7500],"....only display first 7500 objs, if want more, set enforceALL=T")
+    }
+    return(y)
+  }
+  colname0 <- colnames(x) |> washnames()
+  rownames0 <- rownames(x) |> washnames()
+  ui <- fluidPage(
+    tags$head(
+      tags$style(type = "text/css", "
+      #shiny-disconnected-overlay {
+        background-color: inherit;
+        opacity: 0;
+      }
+    ")
+    ),
+    titlePanel("VSCRViewer "),
+    div(
+      style = "text-align: left;",
+      tags$footer(paste0("You can using Command+F to enable search in Ace Editor"), style = "font-size: 14px; color: black;")
+    ),
+    div(
+      style = "text-align: center;",
+      tags$footer(paste0("Col Names: "), style = "font-size: 14px; color: black;")
+    ),
+    aceEditor("r_code",
+              mode = "r",            # Set editor mode to R
+              theme = "textmate",    # Set editor theme
+              value = Print.Char(colname0,Type = "tab",return = T),
+              readOnly=T,
+              wordWrap=T,height="150px"),
+    div(
+      style = "text-align: center;",
+      tags$footer(paste0("Row Names: "), style = "font-size: 14px; color: black;")
+    ),
+    aceEditor("r_code2",
+              mode = "r",            # Set editor mode to R
+              theme = "textmate",    # Set editor theme
+              value = Print.Char(rownames0,Type = "tab",return = T),
+              readOnly=T,
+              wordWrap=T,height="150px"),
+    div(
+      style = "text-align: center;",
+      tags$footer(paste0("Head: "), style = "font-size: 14px; color: black;")
+    ),
+    aceEditor("r_code3",
+              mode = "r",            # Set editor mode to R
+              theme = "textmate",    # Set editor theme
+              value = capture.output(head(x,n = n_lines)),
+              readOnly=T,
+              wordWrap=T,height="150px")
+  )
+  server <- function(input, output) {
+  }
+  message("Web Viewer generated. You can use Ctrl+C to cancel shiny app.\nThe webpage is static, so it won't be lost after closing, and you can continue with your other tasks.")
+  shinyApp(ui = ui, server = server)
+}
 
 
 .onAttach<-function(libname,pkgname){
