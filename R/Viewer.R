@@ -373,6 +373,14 @@ PreviewDF <- function(x,n_lines=7L,enforceALL=F){
   colname0 <- colnames(x) |> washnames()
   rownames0 <- rownames(x) |> washnames()
   ui <- fluidPage(
+    tags$head(
+      tags$style(type = "text/css", "
+      #shiny-disconnected-overlay {
+        background-color: inherit;
+        opacity: 0;
+      }
+    ")
+    ),
     titlePanel("VSCRViewer "),
     div(
       style = "text-align: left;",
@@ -411,6 +419,7 @@ PreviewDF <- function(x,n_lines=7L,enforceALL=F){
   )
   server <- function(input, output) {
   }
+  message("Web Viewer generated. You can use Ctrl+C to cancel shiny app.\nThe webpage is static, so it won't be lost after closing, and you can continue with your other tasks.")
   shinyApp(ui = ui, server = server)
 }
 
