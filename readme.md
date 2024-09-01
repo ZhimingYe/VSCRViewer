@@ -40,6 +40,28 @@ Running in other place without RStudio is difficult to monitor environment, and 
 
 ![](Figs/envview.jpg)
 
+-   **A better `print` function**
+
+like this:
+
+```         
+> c("Age","Sex","Hobby","Country")
+[1] "Age"     "Sex"     "Hobby"   "Country"
+> test0<-c("Age","Sex","Hobby","Country")
+> Print.Char(test0,Type = "plus")
+~Age+Sex+Hobby+Country
+> Print.Char(test0,Type = "c")
+"Age","Sex","Hobby","Country"
+> Print.Char(test0,Type = "tab")
+
+Age
+Sex
+Hobby
+Country
+```
+
+You can easily generate a formula, vector, or output genes to any websites like `metascape`.
+
 -   **Integrated with VSCode**:
 
 Enjoy the convenience of RStudio’s object inspection capabilities within the powerful VSCode editor.
@@ -108,12 +130,13 @@ Enjoy the convenience of RStudio’s object inspection capabilities within the p
     ```         
     dotViewer::ViewList(x)
     ```
-    
+
 4.  **Viewing environment:**
 
     ```         
     dotViewer::ViewEnv(x)
     ```
-## License
+
+    ## License
 
 GPL-V3
