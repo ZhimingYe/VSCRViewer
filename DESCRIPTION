@@ -1,7 +1,7 @@
 Type: Package
 Package: dotViewer
 Title: View R Object in Shiny
-Version: 0.1.0
+Version: 0.1.2
 Author: Zhiming Ye
 Maintainer: Zhiming Ye <garnetcrow@hotmail.com>
 Description: In RStudio, the Environment pane provides a good overview of

@@ -51,11 +51,55 @@ ViewObj<-function(x,selfExpr=F,pattern1=NULL,pattern2=NULL,pattern3=NULL,move=0,
     pattern3<-".*?:"
   }
   if(!selfExpr){
-    .ViewInternal(capture.output(str(x,strict.width="cut")),pattern1 = pattern1,pattern2=pattern2,pattern3=pattern3,move=move,removeBlank=removeBlank)
+    .ViewInternal(capture.output(str(x,max.level = NA,list.len=100L,strict.width="cut")),pattern1 = pattern1,pattern2=pattern2,pattern3=pattern3,move=move,removeBlank=removeBlank)
   }
   else{
     .ViewInternal(x,pattern1 = pattern1,pattern2=pattern2,pattern3=pattern3,move=move,removeBlank=removeBlank)
   }
+}
+#' Viewing list in browser
+#'
+#' @param x A List
+#'
+#' @author Zhiming Ye
+#' @return A shiny website
+#' @export
+#'
+ViewList <- function(x){
+  if(!is.list(x)){
+    stop("Not A list!")
+  }
+  .ViewListInternal(x)
+}
+
+.ViewListInternal <- function(x){
+  require(shiny)
+  require(shinyTree)
+  require(shinyAce)
+
+  ui <- shinyUI(
+    pageWithSidebar(
+      titlePanel("dotViewer 0.1.0"),
+
+      sidebarPanel(
+        shinyTree("tree"),width = 10
+      ),
+      mainPanel(
+        aceEditor("r_code",
+                  mode = "r",            # Set editor mode to R
+                  theme = "textmate",    # Set editor theme
+                  value = capture.output(str(x,max.level = NA,list.len=100L,strict.width="cut")),
+                  readOnly=T,
+                  wordWrap=T,height="800px"),width = 10
+      )
+    ))
+  server <- shinyServer(function(input, output, session) {
+    output$tree <- renderTree({
+      x
+    })
+
+  })
+  shinyApp(ui=ui,server = server)
 }
 
 .ViewInternal<-function(x,pattern1,pattern2,pattern3,move=0,removeBlank=T){
@@ -152,7 +196,7 @@ ViewObj<-function(x,selfExpr=F,pattern1=NULL,pattern2=NULL,pattern3=NULL,move=0,
 
   ui <- shinyUI(
     pageWithSidebar(
-      headerPanel("dotViewer 0.1.0"),
+      titlePanel("dotViewer 0.1.0"),
 
       sidebarPanel(
         shinyTree("tree"),width = 10
@@ -192,3 +236,7 @@ ViewObj<-function(x,selfExpr=F,pattern1=NULL,pattern2=NULL,pattern3=NULL,move=0,
 
   shinyApp(ui = ui, server = server)
 }
+.onAttach<-function(libname,pkgname){
+  packageStartupMessage("\n***dotViewer***\nView DF using ViewDF, View Object using ViewObj, View List using ViewList\n=============\nAuthor:Zhiming Ye\n")
+}
+# attachment::att_amend_desc()

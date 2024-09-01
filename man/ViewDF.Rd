@@ -12,7 +12,7 @@ ViewDF(x, n = 10000)
 \item{n}{Display n lines}
 }
 \value{
-A shiny website
+A shiny website rendered by DT
 }
 \description{
 Viewing tables in browser

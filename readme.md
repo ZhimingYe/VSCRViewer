@@ -8,25 +8,31 @@
 
 -   **S4 Object Inspection**:
 
-Easily inspect S4 objects' slots and structure, similar to the RStudio environment. ![](Figs/S4obj.jpg)
+Easily inspect S4 objects' slots and structure, similar to the RStudio environment, by print `ViewObj(x)`. 
+
+![](Figs/S4obj.jpg)
 
 -   **Comprehensive Property Overview**:
 
-dotViewer parses the output of the `str()` function to generate a detailed property map using `ShinyTree`, providing a clear and organized overview of an object’s structure. 
+dotViewer parses the output of the `str()` function to generate a detailed property map using `ShinyTree`, providing a clear and organized overview of an object’s structure.
 
 ![](Figs/s3obj.jpg)
 
 -   **S3 and Untested Object Compatibility**:
 
-For objects like S3 and others that may not have been extensively tested, dotViewer offers an `AceEditor`-based editor. This editor allows for the preview of `str()` output with advanced features like syntax highlighting and search, enhancing your understanding of object structures, which are not supported in the default VSCode R extension. 
+For objects like S3 and others that may not have been extensively tested, dotViewer offers an `AceEditor`-based editor. This editor allows for the preview of `str()` output with advanced features like syntax highlighting and search, enhancing your understanding of object structures, which are not supported in the default VSCode R extension.
 
 ![](Figs/S3Tibble.jpg)
+
+-   **List Viewing**:
+
+`ShinyTree` is based on list, you can use `ViewList` to view lists. 
 
 -   **DT-Based Table Preview**:
 
 When working over SSH connections, loading large tables into the VSCode front-end can potentially cause instability. dotViewer addresses this by providing a preview pane based on DT for table objects, ensuring a more stable experience.
 
-![](Figs/DTExample.jpg) 
+![](Figs/DTExample.jpg)
 
 -   **Integrated with VSCode**:
 
@@ -89,6 +95,12 @@ Enjoy the convenience of RStudio’s object inspection capabilities within the p
 
     ```         
     dotViewer::ViewDF(x,n = 10000) # You can determine how many rows is passed to DT
+    ```
+    
+3.  **Viewing lists:**
+
+    ```         
+    dotViewer::ViewList(x)
     ```
 
 ## License
