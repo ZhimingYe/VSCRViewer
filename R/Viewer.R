@@ -418,6 +418,48 @@ PreviewDF <- function(x,n_lines=7L,enforceALL=F){
   shinyApp(ui = ui, server = server)
 }
 
+#' @title Arrange Table Function - Sort and filter columns of a data frame or matrix by a specified vector
+#'
+#' @param Mat Target matrix or df.
+#' @param FilterList Accord which to sort and filter columns
+#' @param mode in Version 5.6 update, new "V2" mode is enabled. you can choose the V1 mode to change to the origin mode.
+#'
+#' @return a Matrix
+#' @export
+#' @author Zhiming Ye
+#'
+
+Arrange_Table <- function(Mat, FilterList,mode="V2") {
+  warning("in Version 5.6 update, new V2 mode is enabled. you can choose the V1 mode to change to the origin mode.\n")
+  if(mode=="V2"){
+    FilterList<-FilterList[FilterList%in%rownames(Mat)]
+  }
+  Mat <-
+    as.data.frame(Mat) %>% dplyr::filter(rownames(Mat) %in% FilterList)
+  rn1 <- rownames(Mat)
+  rn2 <- FilterList
+  Mat <- Mat[rn1[match(rn2, rn1)], ]
+  return(Mat)
+}
+
+#' @title Standardize
+#' @description Standardize according to rows
+#' @param x data
+#'
+#' @return Standardized matrix
+#' @export
+#' @author Zhiming Ye
+#'
+
+std_<-function(x){
+  data<-x%>%as.matrix()
+  for (i in 1:dim(data)[[1]]) {
+    data[i,] <- (data[i,] - mean(data[i,], na.rm = TRUE))/sd(data[i,], na.rm = TRUE)
+  }
+  return(data)
+}
+
+
 
 .onAttach<-function(libname,pkgname){
   require(shiny)
