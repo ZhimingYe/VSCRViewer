@@ -423,6 +423,7 @@ PreviewDF <- function(x,n_lines=7L,enforceALL=F){
   require(shiny)
   require(shinyAce)
   require(shinyjs)
+  require(shinyTree)
   require(DT)
   packageStartupMessage("\n***VSCRViewer***\nView DF using ViewDF, View Object using ViewObj, View List using ViewList\n=============\nAuthor:Zhiming Ye\n")
 }
