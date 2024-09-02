@@ -83,7 +83,7 @@ ViewList <- function(x){
 ViewEnv <- function(envir=parent.frame()){
   objects <- ls(envir = envir)
   object_types <- sapply(objects, function(x) class(get(x,envir = envir)))
-  ViewObj(object_types,warning=F)
+  ViewDF(data.frame(Item=names(object_types),Type=object_types))
 }
 
 #' View Environment object and return a list
