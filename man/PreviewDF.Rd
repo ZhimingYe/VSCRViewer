@@ -4,12 +4,14 @@
 \alias{PreviewDF}
 \title{Previewing data table elements like rownames or colnames using Ace Editor}
 \usage{
-PreviewDF(x, n_lines = 7L)
+PreviewDF(x, n_lines = 7L, enforceALL = F)
 }
 \arguments{
 \item{x}{A data.frame, tibble ...}
 
 \item{n_lines}{display n rows}
+
+\item{enforceALL}{only display first 7500 objs, if want more, set enforceALL=T}
 }
 \value{
 A shiny page

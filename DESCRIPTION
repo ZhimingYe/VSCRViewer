@@ -1,7 +1,7 @@
 Type: Package
 Package: VSCRViewer
 Title: View R Object in Shiny
-Version: 0.1.6
+Version: 0.1.7
 Author: Zhiming Ye
 Maintainer: Zhiming Ye <garnetcrow@hotmail.com>
 Description: In RStudio, the Environment pane provides a good overview of
@@ -14,6 +14,7 @@ Imports:
     DT,
     shiny,
     shinyAce,
+    shinyjs,
     shinyTree,
     stringr
 Encoding: UTF-8

@@ -83,7 +83,7 @@ ViewList <- function(x){
 ViewEnv <- function(envir=parent.frame()){
   objects <- ls(envir = envir)
   object_types <- sapply(objects, function(x) class(get(x,envir = envir)))
-  ViewObj(object_types,warning=F)
+  ViewDF(data.frame(Item=names(object_types),Type=object_types))
 }
 
 #' View Environment object and return a list
@@ -101,9 +101,7 @@ lsEnv <- function(envir=parent.frame()){
 }
 
 .ViewListInternal <- function(x){
-  require(shiny)
-  require(shinyTree)
-  require(shinyAce)
+
 
   ui <- fluidPage(
     tags$head(
@@ -232,9 +230,7 @@ lsEnv <- function(envir=parent.frame()){
     test1<-list()
   }
   )
-  require(shiny)
-  require(shinyTree)
-  require(shinyAce)
+
 
   ui <- fluidPage(
     tags$head(
@@ -278,8 +274,7 @@ lsEnv <- function(envir=parent.frame()){
 
 .DFViewer<-function(x){
   tryCatch({df<-as.data.frame(x)},error=function(e){"Not Data frame!"})
-  require(shiny)
-  require(DT)
+
   ui <- fluidPage(
     titlePanel("VSCRViewer "),
     DTOutput("mytable")
@@ -425,6 +420,11 @@ PreviewDF <- function(x,n_lines=7L,enforceALL=F){
 
 
 .onAttach<-function(libname,pkgname){
+  require(shiny)
+  require(shinyAce)
+  require(shinyjs)
+  require(shinyTree)
+  require(DT)
   packageStartupMessage("\n***VSCRViewer***\nView DF using ViewDF, View Object using ViewObj, View List using ViewList\n=============\nAuthor:Zhiming Ye\n")
 }
 # attachment::att_amend_desc()
